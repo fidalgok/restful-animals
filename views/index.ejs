@@ -1,0 +1,24 @@
+<% include partials/header %>
+	<div class="ui main text container">
+		<h1 class="ui header">All Of Our Animals!</h1>
+		<p>Check out all of the animals that you've added below:</p>
+		<div class="ui items segments">
+			<% animals.forEach(function(animal){ %> 
+			<div class="item segment">
+				<a class="ui small image" href="/animals/<%= animal._id %>">
+					<img src="<%= animal.image %>">
+				</a>
+				<div class="content">
+					<a href="/animals/<%= animal._id %>" class="header"><%= animal.name %> the <%= animal.type %></a>
+					<div class="description">
+						<%= animal.description %>
+					</div>
+					<div class="extra">Birthdate: <%= animal.birthday.toDateString() %></div>
+				</div>
+
+			</div>
+			<% }); %>
+		</div>
+	</div>
+
+<% include partials/footer %>
