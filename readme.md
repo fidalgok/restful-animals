@@ -20,6 +20,6 @@ Destroy | /animals/:id | DELETE | Delete animal then redirect somewhere | animal
 - [x] setup index route, header and footer partials, and animals.ejs template
 - [x] configure the mongoose schema and model and get the mongo db animals collection setup
 - [x] setup the new route and template and the create route then create a few animals
-- [] setup the show route and template
-- [] setup the edit route and template and the update route
-- [] setup the destroy route
+- [ ] setup the show route and template
+- [ ] setup the edit route and template and the update route
+- [ ] setup the destroy route
