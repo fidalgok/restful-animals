@@ -2,9 +2,9 @@
 	<div class="ui main text container">
 		<h1 class="ui header">All Of Our Animals!</h1>
 		<p>Check out all of the animals that you've added below:</p>
-		<div class="ui items segments">
+		<div class="ui attached items segments">
 			<% animals.forEach(function(animal){ %> 
-			<div class="item segment">
+			<div class="top attached padded item segment">
 				<a class="ui small image" href="/animals/<%= animal._id %>">
 					<img src="<%= animal.image %>">
 				</a>
@@ -13,10 +13,20 @@
 					<div class="description">
 						<%= animal.description %>
 					</div>
-					<div class="extra">Birthdate: <%= animal.birthday.toDateString() %></div>
+					<div class="extra">Birthdate: 
+						<% if(animal.birthday){ %> 
+							<%= animal.birthday.toDateString(); %>
+						<% } else { %>
+							<%= animal.birthday %>
+						<%}%>
+					</div>	
+					
 				</div>
 
 			</div>
+			<a class="attached inverted orange button" href="/animals/<%= animal.id %>/edit">
+				<i class="ui paw icon"></i>Edit
+			</a>
 			<% }); %>
 		</div>
 	</div>

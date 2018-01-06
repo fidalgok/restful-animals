@@ -80,6 +80,62 @@ app.post("/animals", function(req, res){
 	}
 });
 
+//Show Route
+app.get("/animals/:id", function(req, res){
+	//show individual animal based off of id
+	Animal.findById(req.params.id, function(err, animal){
+		res.render("show", {animal:animal});
+	});
+});
+
+//edit route
+app.get("/animals/:id/edit", function(req, res){
+	//find animal and render the edit form
+	Animal.findById(req.params.id, function(err, animal){
+		if(err){
+			console.log(err);
+		}else if(animal.birthday){
+			
+			var birthYear = animal.birthday.getFullYear().toString();
+			var birthMonth = animal.birthday.getMonth() < 9 ? "0" + (animal.birthday.getMonth() +1) : animal.birthday.getMonth() +1;
+			var birthDate = animal.birthday.getDate() <= 9 ? "0" + animal.birthday.getDate().toString(): animal.birthday.getDate().toString();
+			var newBirthday =  birthYear + "-" + birthMonth + "-" + birthDate;
+			
+			res.render("edit", {animal:animal, birthday: newBirthday});
+		} else {
+			res.render("edit", {animal: animal, birthday: animal.birthday});
+		}
+	});
+	
+});
+
+//update route
+app.put("/animals/:id", function(req, res){
+	req.body.animal.description = req.sanitize(req.body.animal.description);
+	Animal.findByIdAndUpdate(req.params.id, req.body.animal,function(err, animal){
+		if(err){
+			console.log(err);
+			res.redirect("/animals");
+		} else{
+			res.redirect("/animals");
+		}
+	});
+});
+
+//Destroy Route
+app.delete("/animals/:id", function(req, res){
+	//get animal, then destroy
+	Animal.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			console.log(err);
+			res.redirect("/animals");
+		} else {
+
+			res.redirect("/animals");
+		}
+	});
+});
+
 //listener
 app.listen(3000, function(){
 	console.log("animal app is running");

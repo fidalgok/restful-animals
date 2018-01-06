@@ -1,0 +1,25 @@
+<% include partials/header %>
+
+<div class="ui padded text container segment">
+	<div class="ui grid">
+		<div class="two column row">
+		<div class="four wide column">
+			<img class="image" src="<%= animal.image %>">
+		</div>
+		<div class="twelve wide column">
+			<h2><%= animal.name %></h2>
+			<p><%= animal.description%></p>
+		</div>
+		</div>
+		<div class="two column row">
+			<div class="column">
+				<a class="ui inverted orange button" href="/animals/<%= animal.id %>/edit">Edit</a>
+				<form action="/animals/<%= animal.id %>?_method=DELETE" method="POST">
+					<button class="ui inverted red button">Delete</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% include partials/footer %>
